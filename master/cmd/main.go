@@ -5,7 +5,6 @@ package main
 //		Stores them in DB (Gorm/postgres backend)
 //		authenticates the messenger (by signature? universal node privkey, preshared)
 //		SSL (pre-shared master key)
-// https://github.com/Sirupsen/logrus logger
 
 import (
 	"os"
