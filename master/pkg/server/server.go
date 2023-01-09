@@ -57,7 +57,9 @@ func nodeUpdate(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&test)
 	log.Printf("test after decode: %v", test)
 	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		log.Info("error:", err)
+		return
 	}
 	w.Write([]byte("updated :) \n"))
 }
