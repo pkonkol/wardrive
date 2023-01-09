@@ -2,3 +2,5 @@ app.env
 postgres-data/
 target/
 *.log
+ignore/
+*.pem

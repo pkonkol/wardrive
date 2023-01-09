@@ -1,6 +1,8 @@
 package db
 
 import (
+	"time"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
@@ -23,6 +25,15 @@ type WifiEntry struct {
 	Ssid string
 }
 
+type Node struct {
+	ID           string
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+	Seen         time.Time
+	EntriesAdded int64
+	Metadata     string
+}
+
 func connectDB(config *config.Config) {
 	var err error
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai", config.DBHost, config.DBUserName, config.DBUserPassword, config.DBName)
@@ -39,7 +50,8 @@ func New(l *logrus.Logger, c *config.Config) {
 	log = l
 	connectDB(c)
 	DB.AutoMigrate(&WifiEntry{})
-	log.Info("initialized db")
+	DB.AutoMigrate(&Node{})
+	log.Info("migrated DB")
 	DB.Create(&WifiEntry{Lat: 21.37, Lon: 14.88, Ssid: "TestSSID1"})
 }
 
@@ -53,4 +65,20 @@ func GetSomeShit() {
 	log.Infof("e is %#v", e)
 	DB.Delete(&e, 1)
 
+}
+
+func GetAllEntries() {
+
+}
+
+func GetNode(id string) *Node {
+	var n Node
+	DB.First(&n, id)
+	return &n
+}
+
+func GetNodeIDs() []string {
+	var ids []string
+	DB.Find(&ids, "Node?")
+	return ids
 }
