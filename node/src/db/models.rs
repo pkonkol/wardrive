@@ -1,8 +1,7 @@
-use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 //use serde_json::{Map, Value};
 
-#[derive(Queryable, Deserialize, Serialize)]
+#[derive(Deserialize, Serialize)]
 pub struct WifiEntry {
     pub id: i32,
     pub lat: String,
@@ -10,7 +9,7 @@ pub struct WifiEntry {
     pub ssid: bool,
 }
 
-#[derive(Queryable, Deserialize, Serialize)]
+#[derive(Deserialize, Serialize)]
 pub struct OpenPorts {
     pub id: i32,
     pub ip: String,
