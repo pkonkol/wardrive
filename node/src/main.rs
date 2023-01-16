@@ -16,6 +16,7 @@ mod wifi;
 mod client;
 mod server;
 mod db;
+mod tests_common;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -48,7 +49,7 @@ async fn main() -> anyhow::Result<()> {
         wifi::start().await;
     });
     info!("NOT IMPLEMENTED (stub) spawned wifi scanner as tokio task");
-    
+
     Ok(())
 }
 

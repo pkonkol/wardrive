@@ -1,6 +1,7 @@
 mod request;
 
 use super::db;
+use super::db::WifiEntry;
 pub use request::{get_status, post_update, send_entries};
 use std::net::{SocketAddr, IpAddr, Ipv4Addr};
 use tokio::time::{sleep, Duration};
@@ -28,4 +29,23 @@ pub async fn update_loop() {
         } 
         sleep(Duration::from_secs(30));
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::tests_common::mock_entries;
+
+    #[tokio::test]
+    async fn test_status() {
+        let s = status().await;
+        assert_eq!(s, "DB status");
+    }
+
+    #[tokio::test]
+    async fn test_mock_entries() {
+        let e = mock_entries();
+        println!("{:?}", e);
+    }
+
 }

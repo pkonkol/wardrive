@@ -135,6 +135,7 @@ mod tests {
     use super::*;
     use std::sync::Once;
     // use tokio::test;
+    use crate::tests_common::mock_entries;
 
     static SETUP: Once = Once::new();
 
